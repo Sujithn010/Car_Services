@@ -1,0 +1,306 @@
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| carservices        |
+| information_schema |
+| intern             |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+7 rows in set (0.001 sec)
+
+MariaDB [(none)]> create database MobileCarServices;
+Query OK, 1 row affected (0.017 sec)
+
+MariaDB [(none)]> show tables;
+ERROR 1046 (3D000): No database selected
+MariaDB [(none)]> use MobileCarServices;
+Database changed
+MariaDB [MobileCarServices]> show tables;
+Empty set (0.001 sec)
+
+MariaDB [MobileCarServices]> create table admin(adminId int(10) not null,name char(20) not null,password varchar(30) not null);
+Query OK, 0 rows affected (0.370 sec)
+
+MariaDB [MobileCarServices]> show tables;
++-----------------------------+
+| Tables_in_mobilecarservices |
++-----------------------------+
+| admin                       |
++-----------------------------+
+1 row in set (0.001 sec)
+
+MariaDB [MobileCarServices]> desc admin;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| adminId  | int(10)     | NO   |     | NULL    |       |
+| name     | char(20)    | NO   |     | NULL    |       |
+| password | varchar(30) | NO   |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.006 sec)
+
+MariaDB [MobileCarServices]> use carservices;
+Database changed
+MariaDB [carservices]> desc admin;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| adminId  | int(11)     | YES  |     | NULL    |       |
+| name     | varchar(20) | YES  |     | NULL    |       |
+| password | varchar(20) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.006 sec)
+
+MariaDB [carservices]> use MobileCarServices;
+Database changed
+MariaDB [MobileCarServices]> create table Customer(customerId int(10) primary key not null auto_increment,cust_name char(30),userName varchar(50) not null,contactInfo int(10),address varchar(100),password varchar(500),email varchar(50));
+Query OK, 0 rows affected (0.189 sec)
+
+MariaDB [MobileCarServices]> desc Customer;
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| customerId  | int(10)      | NO   | PRI | NULL    | auto_increment |
+| cust_name   | char(30)     | YES  |     | NULL    |                |
+| userName    | varchar(50)  | NO   |     | NULL    |                |
+| contactInfo | int(10)      | YES  |     | NULL    |                |
+| address     | varchar(100) | YES  |     | NULL    |                |
+| password    | varchar(500) | YES  |     | NULL    |                |
+| email       | varchar(50)  | YES  |     | NULL    |                |
++-------------+--------------+------+-----+---------+----------------+
+7 rows in set (0.008 sec)
+
+MariaDB [MobileCarServices]> use carservices;
+Database changed
+MariaDB [carservices]> desc Customer;
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| customer_id | int(11)      | NO   | PRI | NULL    | auto_increment |
+| cust_name   | char(30)     | YES  |     | NULL    |                |
+| userName    | varchar(30)  | YES  | MUL | NULL    |                |
+| contactInfo | int(10)      | YES  |     | NULL    |                |
+| address     | varchar(100) | YES  |     | NULL    |                |
+| password    | varchar(20)  | YES  |     | NULL    |                |
+| email       | varchar(30)  | YES  |     | NULL    |                |
++-------------+--------------+------+-----+---------+----------------+
+7 rows in set (0.006 sec)
+
+MariaDB [carservices]> use MobileCarServices;
+Database changed
+MariaDB [MobileCarServices]> alter table Customer add key userName;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [MobileCarServices]> alter table Customer add key 'userName';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''userName'' at line 1
+MariaDB [MobileCarServices]> alter table Customer add primary key userName;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [MobileCarServices]> show tables;
++-----------------------------+
+| Tables_in_mobilecarservices |
++-----------------------------+
+| admin                       |
+| customer                    |
++-----------------------------+
+2 rows in set (0.001 sec)
+
+MariaDB [MobileCarServices]> create table Dealer(dealerId int(10) primary key not null auto_increment,name char(50),contact int(10),address varchar(100),email varchar(100));
+Query OK, 0 rows affected (0.482 sec)
+
+MariaDB [MobileCarServices]> desc Dealer;
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| dealerId | int(10)      | NO   | PRI | NULL    | auto_increment |
+| name     | char(50)     | YES  |     | NULL    |                |
+| contact  | int(10)      | YES  |     | NULL    |                |
+| address  | varchar(100) | YES  |     | NULL    |                |
+| email    | varchar(100) | YES  |     | NULL    |                |
++----------+--------------+------+-----+---------+----------------+
+5 rows in set (0.038 sec)
+
+MariaDB [MobileCarServices]> use carservices;
+Database changed
+MariaDB [carservices]> desc dealer;
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| dealerId | int(11)      | NO   | PRI | NULL    | auto_increment |
+| name     | char(30)     | YES  |     | NULL    |                |
+| contact  | int(10)      | YES  |     | NULL    |                |
+| address  | varchar(100) | YES  |     | NULL    |                |
+| email    | varchar(100) | YES  |     | NULL    |                |
++----------+--------------+------+-----+---------+----------------+
+5 rows in set (0.005 sec)
+
+MariaDB [carservices]> use MobileCarServices;
+Database changed
+MariaDB [MobileCarServices]> show tables;
++-----------------------------+
+| Tables_in_mobilecarservices |
++-----------------------------+
+| admin                       |
+| customer                    |
+| dealer                      |
++-----------------------------+
+3 rows in set (0.001 sec)
+
+MariaDB [MobileCarServices]> create table Bookings(bookingId int(100) primary key not null auto_increment,customerId );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 1
+MariaDB [MobileCarServices]> desc Customer;
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| customerId  | int(10)      | NO   | PRI | NULL    | auto_increment |
+| cust_name   | char(30)     | YES  |     | NULL    |                |
+| userName    | varchar(50)  | NO   |     | NULL    |                |
+| contactInfo | int(10)      | YES  |     | NULL    |                |
+| address     | varchar(100) | YES  |     | NULL    |                |
+| password    | varchar(500) | YES  |     | NULL    |                |
+| email       | varchar(50)  | YES  |     | NULL    |                |
++-------------+--------------+------+-----+---------+----------------+
+7 rows in set (0.005 sec)
+
+MariaDB [MobileCarServices]> desc dealer;
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| dealerId | int(10)      | NO   | PRI | NULL    | auto_increment |
+| name     | char(50)     | YES  |     | NULL    |                |
+| contact  | int(10)      | YES  |     | NULL    |                |
+| address  | varchar(100) | YES  |     | NULL    |                |
+| email    | varchar(100) | YES  |     | NULL    |                |
++----------+--------------+------+-----+---------+----------------+
+5 rows in set (0.005 sec)
+
+MariaDB [MobileCarServices]> create table Bookings(bookingId int(100) primary key not null auto_increment,customerId int(10),foreign key(customerId) references Customer(customerId),dealerId int(10),foreign key(dealerId) references Dealer(dealerId),dateOfService date,typeOfService varchar(500),additionalInfo varchar(500));
+Query OK, 0 rows affected (0.318 sec)
+
+MariaDB [MobileCarServices]> desc Bookings;
++----------------+--------------+------+-----+---------+----------------+
+| Field          | Type         | Null | Key | Default | Extra          |
++----------------+--------------+------+-----+---------+----------------+
+| bookingId      | int(100)     | NO   | PRI | NULL    | auto_increment |
+| customerId     | int(10)      | YES  | MUL | NULL    |                |
+| dealerId       | int(10)      | YES  | MUL | NULL    |                |
+| dateOfService  | date         | YES  |     | NULL    |                |
+| typeOfService  | varchar(500) | YES  |     | NULL    |                |
+| additionalInfo | varchar(500) | YES  |     | NULL    |                |
++----------------+--------------+------+-----+---------+----------------+
+6 rows in set (0.007 sec)
+
+MariaDB [MobileCarServices]> use carservices;\
+Database changed
+MariaDB [carservices]> desc Bookings;
++----------------+--------------+------+-----+---------+----------------+
+| Field          | Type         | Null | Key | Default | Extra          |
++----------------+--------------+------+-----+---------+----------------+
+| bookingId      | int(11)      | NO   | PRI | NULL    | auto_increment |
+| customerId     | int(10)      | YES  | MUL | NULL    |                |
+| dealerId       | int(10)      | YES  | MUL | NULL    |                |
+| dateOfService  | date         | YES  |     | NULL    |                |
+| TypeOfService  | varchar(300) | YES  |     | NULL    |                |
+| additionalInfo | varchar(300) | YES  |     | NULL    |                |
++----------------+--------------+------+-----+---------+----------------+
+6 rows in set (0.007 sec)
+
+MariaDB [carservices]> use MobileCarServices;
+Database changed
+MariaDB [MobileCarServices]> show tables;
++-----------------------------+
+| Tables_in_mobilecarservices |
++-----------------------------+
+| admin                       |
+| bookings                    |
+| customer                    |
+| dealer                      |
++-----------------------------+
+4 rows in set (0.001 sec)
+
+MariaDB [MobileCarServices]> create table feedback(bookingId int(100),foreign key(bookingId) references Bookings(bookingId),feedback varchar(200),rating int(10));
+Query OK, 0 rows affected (0.253 sec)
+
+MariaDB [MobileCarServices]> show tables;
++-----------------------------+
+| Tables_in_mobilecarservices |
++-----------------------------+
+| admin                       |
+| bookings                    |
+| customer                    |
+| dealer                      |
+| feedback                    |
++-----------------------------+
+5 rows in set (0.001 sec)
+
+MariaDB [MobileCarServices]> desc feecback;
+ERROR 1146 (42S02): Table 'mobilecarservices.feecback' doesn't exist
+MariaDB [MobileCarServices]> desc feedback;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| bookingId | int(100)     | YES  | MUL | NULL    |       |
+| feedback  | varchar(200) | YES  |     | NULL    |       |
+| rating    | int(10)      | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+3 rows in set (0.041 sec)
+
+MariaDB [MobileCarServices]> use carservices;
+Database changed
+MariaDB [carservices]> desc feedback;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| bookingId | int(10)      | YES  | MUL | NULL    |       |
+| feedback  | varchar(200) | YES  |     | NULL    |       |
+| rating    | int(11)      | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+3 rows in set (0.006 sec)
+
+MariaDB [carservices]> use MobileCarServices;
+Database changed
+MariaDB [MobileCarServices]> drop feedback;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'feedback' at line 1
+MariaDB [MobileCarServices]> drop table feedback;
+Query OK, 0 rows affected (0.330 sec)
+
+MariaDB [MobileCarServices]> create table feedback(bookingId int(100),foreign key(bookingId) references Bookings(bookingId),feedback varchar(500),rating int(10));
+Query OK, 0 rows affected (0.335 sec)
+
+MariaDB [MobileCarServices]> show tables;
++-----------------------------+
+| Tables_in_mobilecarservices |
++-----------------------------+
+| admin                       |
+| bookings                    |
+| customer                    |
+| dealer                      |
+| feedback                    |
++-----------------------------+
+5 rows in set (0.001 sec)
+
+MariaDB [MobileCarServices]> use carservices;
+Database changed
+MariaDB [carservices]> select * from Customer;
++-------------+-----------+----------+-------------+-------------------------------------+----------------------+----------------------+
+| customer_id | cust_name | userName | contactInfo | address                             | password             | email                |
++-------------+-----------+----------+-------------+-------------------------------------+----------------------+----------------------+
+|           1 | SSS       | SS       |  2147483647 | Delhi                               | sujith               | s@gmail.com          |
+|           7 | Sujith    | killer   |    11233456 | ADDRESS                             | $2y$10$ML28Pq5t.6TQw | svcshekhar@gmail.com |
+|           8 | AAA       | dsadas   |    94562130 | No. 16/22,Lakshmi Nivasa,5th cross, | $2y$10$x/gV3K9Q4r81i | sss@gmail.com        |
+|           9 | sujith    | sujithm  |    94561230 | Bangalore                           | $2y$10$BJRKPNKpuAPFy | sss@j.com            |
++-------------+-----------+----------+-------------+-------------------------------------+----------------------+----------------------+
+4 rows in set (0.099 sec)
+
+MariaDB [carservices]> use MobileCarServices;
+Database changed
+MariaDB [MobileCarServices]> select * from Customer;
++------------+-----------+----------+-------------+---------------------+--------------------------------------------------------------+-------------------+
+| customerId | cust_name | userName | contactInfo | address             | password                                                     | email             |
++------------+-----------+----------+-------------+---------------------+--------------------------------------------------------------+-------------------+
+|          1 | Sumukh    | sumukhr9 |  2147483647 | St.John's,Bangalore | $2y$10$dCge1FrF12UCseqX6XgcLuG45O.gizP95bCc9ZveFsKD.N8Svc.j6 | sumukhr@gmail.com |
++------------+-----------+----------+-------------+---------------------+--------------------------------------------------------------+-------------------+
+1 row in set (0.000 sec)
+

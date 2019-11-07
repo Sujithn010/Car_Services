@@ -1,0 +1,92 @@
+<!--<?php
+
+/*session_start();
+
+$GLOBALS['conn'] = mysqli_connect('localhost','root');
+if($conn){
+    echo "Connection successful";
+}else{
+    echo "Failed to connect";
+}
+
+mysqli_select_db($conn,'CarServices');
+
+
+$GLOBALS['dealerQ'] = "select * from dealer ";
+$GLOBALS['dealerResult'] = mysqli_query($conn,$dealerQ);
+$GLOBALS['num'] = mysqli_num_rows($dealerResult);
+if($num>0){
+    echo "0 results";
+    header('location:Customer.php');
+}*/
+
+?>-->
+
+<!--<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dealer List</title>
+</head>
+<body>
+    <ul>
+        <li> Dealer Id <?php  /*while($row = mysqli_fetch_assoc($dealerResult)) {
+        echo "id: " .$row["dealerId"] ;
+        } */?> 
+        </li>
+        <li> Dealer Name<?php  /*while($row = mysqli_fetch_assoc($dealerResult)) {
+        echo "Name" .$row["name"] ;
+        } */?> 
+        </li>
+        <li> Contact info <?php  /*while($row = mysqli_fetch_assoc($dealerResult)) {
+        echo "Contact No. " .$row["contact"] ;
+        } */?> 
+        </li>
+        <li> City <?php  /*while($row = mysqli_fetch_assoc($dealerResult)) {
+        echo "City: " .$row["city"] ;
+        } */?> 
+        </li>
+        <li> State <?php  /*while($row = mysqli_fetch_assoc($dealerResult)) {
+        echo "State: " .$row["state"] ;
+        } */ ?> 
+        </li>
+    </ul>
+
+</body>
+</html>-->
+
+
+<?php
+
+session_start();
+header('location:customerLogin.php');
+
+$con = mysqli_connect('localhost','root');
+if($con){
+    echo "Connection successful";
+}else{
+    echo "Failed to connect";
+}
+
+mysqli_select_db($con,'CarServices');
+
+
+
+
+$q = "select * from dealer";
+$result = mysqli_query($con,$q);
+$num = mysqli_num_rows($result);
+
+if($num>0){
+    while($row = mysqli_fetch_assoc($result)) {
+        echo "dealerId: " . $row["dealerId"]. " - Dealer Name: " . $row["name"]. "-Contact No." . $row["contact"]. "Address" .$row["city"] $row["state"] "<br>";
+    }
+} else {
+    echo "0 results";
+}
+
+?>
+
+
+?>
